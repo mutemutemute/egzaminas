@@ -35,7 +35,7 @@ const Navbar = () => {
     }
   };
 
-  //addEventListener detects clicks outside the dropdown
+  
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
