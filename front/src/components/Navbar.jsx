@@ -54,7 +54,7 @@ const Navbar = () => {
   return (
     <div className="flex justify-between items-center p-3 bg-[#42416f] text-white">
       
-      <h1 className="text-xl lg:text-3xl text-center">Logo</h1>
+      <h1 className="text-xl lg:text-3xl text-center">Ads</h1>
 
       
       <div className="flex items-center">

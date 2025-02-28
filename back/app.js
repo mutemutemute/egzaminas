@@ -4,6 +4,8 @@ const errorHandler = require("./middlewares/errorHandler");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const userRouter = require("./routers/userRouter");
+const adsRouter = require("./routers/adsRouter");
+
 
 // create server
 const app = express();
@@ -21,6 +23,8 @@ app.use(
 );
 
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/ads", adsRouter);
+
 
 app.all("*", (req, res, next) => {
   const error = new AppError(`Not found - ${req.originalUrl}`, 404);

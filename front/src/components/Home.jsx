@@ -1,10 +1,12 @@
 import Navbar from "./Navbar";
+import Ads from "./Ads";
 
 const Home = () => {
   return (
     <>
       <Navbar />
-      <h1>Home</h1>
+      <div><Ads/></div>
+      
     
     </>
   );
