@@ -3,7 +3,8 @@ const validate = require("../validators/validate");
 const { protect } = require("../controllers/authController");
 const {
     createNewAd,
-    getAllAds
+    getAllAds,
+    deleteUserAdsController
   } = require("../controllers/adsController");
 
 
@@ -13,6 +14,11 @@ const {
   .route("/")
   .post(protect, validate, createNewAd)
   .get(validate, getAllAds)
+
+  router
+  .route("/:id")
+  .delete(protect, validate, deleteUserAdsController);
+
 
 
   module.exports = router;

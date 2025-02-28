@@ -1,4 +1,4 @@
-const { createAd, getAds } = require("../models/adsModel");
+const { createAd, getAds, deleteUserAds } = require("../models/adsModel");
 
 exports.createNewAd = async (req, res, next) => {
   try {
@@ -35,3 +35,15 @@ exports.getAllAds = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.deleteUserAdsController = async (req, res, next) => {
+    const { id } = req.params;
+    const userId = req.user.id;
+    try {
+      await deleteUserAds(id, userId);
+      res.status(200).send();
+    } catch (error) {
+      next(error);
+    }
+  };
+  

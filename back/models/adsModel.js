@@ -41,4 +41,13 @@ exports.getAds = async (name, sortColumn) => {
 };
 
 
+exports.deleteUserAds = async (id, userId) => {
+    const [ad] = await sql`
+        DELETE FROM ads
+        WHERE ads.id = ${id}
+        AND ads.user_id = ${userId}
+        RETURNING *;
+        `;
+    return ad;
+  };
   
