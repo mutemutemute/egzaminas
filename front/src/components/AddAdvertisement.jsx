@@ -5,12 +5,8 @@ import AdContext from "../contexts/AdContext";
 import UserContext from "../contexts/UserContext";
 const API_URL = import.meta.env.VITE_API_URL;
 
-
-
 const AddAdvertisement = () => {
-
-    const { setAds, error, setError, setShowForm } =
-    useContext(AdContext);
+  const { setAds, error, setError, setShowForm } = useContext(AdContext);
   const { user } = useContext(UserContext);
 
   const {
@@ -41,10 +37,9 @@ const AddAdvertisement = () => {
       setError(error.message);
     }
   };
-return(
+  return (
     <>
-    <form onSubmit={handleSubmit(onSubmit)}>
-        
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-4 flex flex-col space-y-1">
           <label htmlFor="name" className="text-sm ">
             Name
@@ -57,7 +52,7 @@ return(
             placeholder="Advertisement Name"
             className="input input-bordered mt-1 p-2  rounded-md w-full flex-1"
           />
-          
+
           {errors.name && (
             <div className="relative">
               <p className="text-red-500 text-sm absolute whitespace-nowrap top-[-0.2rem]">
@@ -85,7 +80,7 @@ return(
             <option value="5">Leisure</option>
             <option value="6">Real estate</option>
           </select>
-          
+
           {errors.category_id && (
             <div className="relative">
               <p className="text-red-500 text-sm absolute whitespace-nowrap top-[-0.2rem]">
@@ -95,7 +90,53 @@ return(
           )}
         </div>
 
-        
+        <div className="mb-4 flex flex-col space-y-1">
+          <label htmlFor="description" className="block text-sm mt-2">
+            Description
+          </label>
+          <textarea
+            {...register("description")}
+            placeholder="Excursion Description"
+            className="input input-bordered mt-1 p-2 rounded-md w-full h-32 flex-1"
+          />
+
+          {errors.description && (
+            <div className="relative">
+              <p className="text-red-500 text-sm absolute whitespace-nowrap top-[-0.2rem]">
+                {errors.description.message}
+              </p>
+            </div>
+          )}
+        </div>
+        <div className="mb-4 flex flex-col space-y-1">
+          <label htmlFor="price" className="text-sm">
+            Price
+          </label>
+          <input
+            {...register("price", {
+              required: "Price is required",
+              valueAsNumber: true, // Convert input value to a number
+              min: {
+                value: 0,
+                message: "Price must be greater than 0",
+              },
+            })}
+            type="number"
+            placeholder="Price"
+            min="0"
+            step="1"
+            className="mt-1 p-2 input input-bordered rounded-md w-full "
+          />
+
+          {errors.price && (
+            <div className="relative">
+              <p className="text-red-500 text-sm absolute whitespace-nowrap top-[-0.2rem]">
+                {errors.price.message}
+              </p>
+            </div>
+          )}
+        </div>
+
         <div className="mb-4 flex flex-col space-y-1">
           <label htmlFor="image_url" className="text-sm ">
             Image URL
@@ -104,7 +145,6 @@ return(
             {...register("image_url", {
               required: "Image URL is required",
               pattern: {
-                
                 value:
                   /^https?:\/\/.*\.(?:png|jpg|jpeg|gif|bmp|svg|webp|tiff)(\?.*)?$/i,
                 message: "Please enter a valid image URL (jpg, png, gif, etc.)",
@@ -114,7 +154,7 @@ return(
             placeholder="Image URL"
             className="input input-bordered mt-1 p-2  rounded-md w-full flex-1"
           />
-          
+
           {errors.image_url && (
             <div className="relative">
               <p className="text-red-500 text-sm absolute whitespace-nowrap top-[-0.2rem]">
@@ -122,10 +162,21 @@ return(
               </p>
             </div>
           )}
+
+          <div className="flex justify-end space-x-2 pt-2 pb-2">
+            <button
+              type="submit"
+              className="btn px-4 py-2 bg-[#42416f] text-white "
+            >
+              Add Advertisement
+            </button>
+          </div>
+          
+          {error && <p className="text-red-500">{error}</p>}
         </div>
-        </form>
+      </form>
     </>
-)
-}
+  );
+};
 
 export default AddAdvertisement;
